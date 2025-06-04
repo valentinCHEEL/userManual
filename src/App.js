@@ -1,4 +1,5 @@
 import './App.css';
+import { useRef, useState, useEffect } from 'react';
 
 function PhoneFrame({ description, imagePath }) {
   return (
@@ -25,8 +26,10 @@ function PhoneFrame({ description, imagePath }) {
 }
 
 function App() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const sections = [
     {
+      id: "creation",
       title: "Création d'une oeuvre",
       phones: [
         {
@@ -56,6 +59,7 @@ function App() {
       ]
     },
     {
+      id: "recherche",
       title: "Recherche d'une oeuvre",
       phones: [
         {
@@ -69,6 +73,7 @@ function App() {
       ]
     },
     {
+      id: "gestion",
       title: "Gestion de ses ouvres",
       phones: [
         {
@@ -94,6 +99,7 @@ function App() {
       ]
     },
     {
+      id: "lecture",
       title: "Lire une oeuvre",
       phones: [
         {
@@ -112,6 +118,25 @@ function App() {
     }
   ];
 
+  const sectionRefs = useRef({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    sectionRefs.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="App">
       <h1 className="main-title">ToonBook</h1>
@@ -120,8 +145,29 @@ function App() {
         Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter par mail à l'adresse suivante : toonbook@gmail.com
       </p>
 
+      <div className="table-of-contents">
+        <h2>Sommaire</h2>
+        <ul>
+          {sections.map((section) => (
+            <li key={section.id}>
+              <a href={`#${section.id}`} onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(section.id);
+              }}>
+                {section.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {sections.map((section, index) => (
-        <div key={index} className="section">
+        <div
+          key={index}
+          className="section"
+          ref={el => sectionRefs.current[section.id] = el}
+          id={section.id}
+        >
           <h2 className="section-title">{section.title}</h2>
           <div className="phones-container">
             {section.phones.map((phone, phoneIndex) => (
@@ -134,6 +180,16 @@ function App() {
           </div>
         </div>
       ))}
+
+      {showScrollTop && (
+        <button
+          className="scroll-to-top"
+          onClick={scrollToTop}
+          aria-label="Retour en haut"
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 }
