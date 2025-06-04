@@ -172,6 +172,22 @@ function App() {
     {
       question: "Comment signaler un contenu inapproprié ?",
       answer: "Un système de signalement est en cours de développement, en attendant vous pouvez nous contacter par mail à l'adresse suivante : toonbook@gmail.com"
+    },
+    {
+      question: "Comment organiser ma lecture ?",
+      answer: "Les livres sont organisés en chapitres, Chaque chapitre contient des paragraphes pour une lecture fluide, Vous pouvez suivre votre progression de lecture en le mettant en favoris et dans la page mes lectures en cours cahque livre lu est comptabilisé"
+    },
+    {
+      question: "Comment marquer ma progression ?",
+      answer: "L'application enregistre automatiquement votre dernière position de lecture et Vous pouvez utiliser la fonction Mes lectures pour suivre vos livres en cours"
+    },
+    {
+      question: "Qu'est-ce que ToonBook ?",
+      answer: "ToonBook est une application de lecture interactive qui vous permet de découvrir et lire des livres à porter de main via sont téléphone et de creer des livres aussi"
+    },
+    {
+      question: "D'autre questions ?",
+      answer: "N'hésitez pas à nous contacter par mail à l'adresse suivante : toonbook@gmail.com"
     }
   ];
 
