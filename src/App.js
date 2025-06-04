@@ -163,7 +163,7 @@ function App() {
   const faqItems = [
     {
       question: "Comment puis-je supprimer mon compte ?",
-      answer: "Pour supprimer votre compte, accédez aux paramètres de votre profil, faites défiler jusqu'à la section 'Gestion du compte' et cliquez sur 'Supprimer mon compte'. Une confirmation vous sera demandée pour éviter toute suppression accidentelle. Notez que cette action est irréversible et supprimera toutes vos œuvres et données."
+      answer: "Un système de suppression de compte est en cours de développement, en attendant vous pouvez nous contacter par mail à l'adresse suivante : toonbook@gmail.com"
     },
     {
       question: "Puis-je modifier une œuvre après sa publication ?",
@@ -171,7 +171,7 @@ function App() {
     },
     {
       question: "Comment signaler un contenu inapproprié ?",
-      answer: "Si vous rencontrez un contenu inapproprié, vous pouvez le signaler en cliquant sur les trois points (...) à côté de l'œuvre concernée. Sélectionnez 'Signaler' et choisissez la raison du signalement. Notre équipe de modération examinera rapidement votre signalement et prendra les mesures appropriées."
+      answer: "Un système de signalement est en cours de développement, en attendant vous pouvez nous contacter par mail à l'adresse suivante : toonbook@gmail.com"
     }
   ];
 
