@@ -25,8 +25,46 @@ function PhoneFrame({ description, imagePath }) {
   );
 }
 
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="faq-item">
+      <div
+        className="faq-question"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {question}
+        <span className={`faq-icon ${isOpen ? 'active' : ''}`}>▼</span>
+      </div>
+      <div className={`faq-answer ${isOpen ? 'active' : ''}`}>
+        {answer}
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const sectionRefs = useRef({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    sectionRefs.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const sections = [
     {
       id: "creation",
@@ -115,32 +153,33 @@ function App() {
           imagePath: "/images/read/3.png"
         }
       ]
+    },
+    {
+      id: "faq",
+      title: "Questions Fréquentes"
     }
   ];
 
-  const sectionRefs = useRef({});
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId) => {
-    sectionRefs.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const faqItems = [
+    {
+      question: "Comment puis-je supprimer mon compte ?",
+      answer: "Pour supprimer votre compte, accédez aux paramètres de votre profil, faites défiler jusqu'à la section 'Gestion du compte' et cliquez sur 'Supprimer mon compte'. Une confirmation vous sera demandée pour éviter toute suppression accidentelle. Notez que cette action est irréversible et supprimera toutes vos œuvres et données."
+    },
+    {
+      question: "Puis-je modifier une œuvre après sa publication ?",
+      answer: "Oui, vous pouvez modifier vos œuvres à tout moment. Accédez à la section 'Mes œuvres', trouvez l'œuvre que vous souhaitez modifier et cliquez sur l'icône de modification. Vous pourrez alors mettre à jour le contenu, les images ou les informations de votre œuvre. Les modifications seront immédiatement visibles pour vos lecteurs."
+    },
+    {
+      question: "Comment signaler un contenu inapproprié ?",
+      answer: "Si vous rencontrez un contenu inapproprié, vous pouvez le signaler en cliquant sur les trois points (...) à côté de l'œuvre concernée. Sélectionnez 'Signaler' et choisissez la raison du signalement. Notre équipe de modération examinera rapidement votre signalement et prendra les mesures appropriées."
+    }
+  ];
 
   return (
     <div className="App">
       <h1 className="main-title">ToonBook</h1>
-      <p className="main-description">Bienvenu sur le manuelle utilisateur de ToonBook,
+      <p className="main-description">
+        Bienvenu sur le manuelle utilisateur de ToonBook,
         vous trouverez ici toutes les étapes pour utiliser l'application.
         Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter par mail à l'adresse suivante : toonbook@gmail.com
       </p>
@@ -169,15 +208,27 @@ function App() {
           id={section.id}
         >
           <h2 className="section-title">{section.title}</h2>
-          <div className="phones-container">
-            {section.phones.map((phone, phoneIndex) => (
-              <PhoneFrame
-                key={phoneIndex}
-                description={phone.description}
-                imagePath={phone.imagePath}
-              />
-            ))}
-          </div>
+          {section.phones ? (
+            <div className="phones-container">
+              {section.phones.map((phone, phoneIndex) => (
+                <PhoneFrame
+                  key={phoneIndex}
+                  description={phone.description}
+                  imagePath={phone.imagePath}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="faq-section">
+              {faqItems.map((item, index) => (
+                <FAQItem
+                  key={index}
+                  question={item.question}
+                  answer={item.answer}
+                />
+              ))}
+            </div>
+          )}
         </div>
       ))}
 
