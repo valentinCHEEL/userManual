@@ -11,7 +11,10 @@ function PhoneFrame({ description, imagePath }) {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'contain'
+              objectFit: 'contain',
+              objectPosition: 'center',
+              backgroundColor: '#f5f5f5',
+              padding: '10px'
             }}
           />
         </div>
@@ -68,19 +71,43 @@ function App() {
     {
       title: "Gestion du profil",
       phones: [
-        { description: "Étape 1: Accédez aux paramètres" },
-        { description: "Étape 2: Modifiez vos informations" },
-        { description: "Étape 3: Changez votre photo" },
-        { description: "Étape 4: Sauvegardez les modifications" }
+        {
+          description: "Étape 1: Accédez à vos paramètres",
+          imagePath: "/images/update_delete/1.png"
+        },
+        {
+          description: "Étape 2: Modifiez vos informations",
+          imagePath: "/images/update_delete/2.png"
+        },
+        {
+          description: "Étape 3: Mettez à jour votre profil",
+          imagePath: "/images/update_delete/3.png"
+        },
+        {
+          description: "Étape 4: Supprimez des éléments",
+          imagePath: "/images/update_delete/4.png"
+        },
+        {
+          description: "Étape 5: Confirmez les modifications",
+          imagePath: "/images/update_delete/5.png"
+        }
       ]
     },
     {
       title: "Interactions",
       phones: [
-        { description: "Étape 1: Découvrez des œuvres" },
-        { description: "Étape 2: Likez et commentez" },
-        { description: "Étape 3: Partagez avec vos amis" },
-        { description: "Étape 4: Suivez vos artistes préférés" }
+        {
+          description: "Étape 1: Découvrez des œuvres",
+          imagePath: "/images/read/1.png"
+        },
+        {
+          description: "Étape 2: Explorez les détails",
+          imagePath: "/images/read/2.png"
+        },
+        {
+          description: "Étape 3: Interagissez avec le contenu",
+          imagePath: "/images/read/3.png"
+        }
       ]
     }
   ];
