@@ -2,7 +2,7 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - main  # ou master, selon votre branche principale
+      - master  # ou master, selon votre branche principale
 
 jobs:
   deploy:
@@ -16,10 +16,10 @@ jobs:
           node-version: '18'
           
       - name: Install Dependencies
-        run: npm install
+        run: cd my-app && npm install
         
       - name: Build
-        run: npm run build
+        run: cd my-app && npm run build
         
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
@@ -27,5 +27,5 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
+          working-directory: ./my-app
           vercel-args: '--prod' 
